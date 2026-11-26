@@ -1,0 +1,10 @@
+from collections import deque
+graph = {'A':['B','C'], 'B':['D','E'], 'C':['F'], 'D':[], 'E':['F'], 'F':[]}
+def bfs(graph, start, goal):
+    q=deque([(start,[start])]); seen={start}
+    while q:
+        node,path=q.popleft()
+        if node==goal: return path
+        for nxt in graph[node]:
+            if nxt not in seen: seen.add(nxt); q.append((nxt,path+[nxt]))
+print('BFS shortest path A to F:', ' -> '.join(bfs(graph,'A','F')))
